@@ -1,6 +1,5 @@
-@extends('layouts.login')
+@extends('layouts.app')
 
 @section('content')
-    <!-- Body -->
-     <p>Hello</p>
+    @include('layouts.index')
 @endsection

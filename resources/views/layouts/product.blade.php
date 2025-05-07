@@ -17,18 +17,18 @@
     rel="stylesheet">
 
   <!-- Favicon -->
-  <link rel="apple-touch-icon" sizes="180x180" href="........../assets/images/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="........../assets/images/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="........../assets/images/favicon/favicon-16x16.png">
-  <link rel="mask-icon" href="........../assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/favicon/apple-touch-icon.png') }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/favicon/favicon-32x32.png') }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon/favicon-16x16.png') }}">
+  <link rel="mask-icon" href="{{ asset('assets/images/favicon/safari-pinned-tab.svg') }}" color="#5bbad5">
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
 
   <!-- Vendor CSS -->
-  <link rel="stylesheet" href="........../assets/css/libs.bundle.css" />
+  <link rel="stylesheet" href="{{ asset('assets/css/libs.bundle.css" />
 
   <!-- Main CSS -->
-  <link rel="stylesheet" href="........../assets/css/theme.bundle.css" />
+  <link rel="stylesheet" href="{{ asset('assets/css/theme.bundle.css" />
 
   <!-- Fix for custom scrollbar if JS is disabled-->
   <noscript>
@@ -56,7 +56,7 @@
                 <div class="d-flex justify-content-between align-items-center flex-wrap">
     
                     <!-- Logo-->
-                    <a class="navbar-brand fw-bold fs-3 m-0 p-0 flex-shrink-0 order-0" href="........../index.html">
+                    <a class="navbar-brand fw-bold fs-3 m-0 p-0 flex-shrink-0 order-0" href="{{ route('home') }}">
                         <div class="d-flex align-items-center">
                             <svg class="f-w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77.53 72.26"><path d="M10.43,54.2h0L0,36.13,10.43,18.06,20.86,0H41.72L10.43,54.2Zm67.1-7.83L73,54.2,68.49,62,45,48.47,31.29,72.26H20.86l-5.22-9L52.15,0H62.58l5.21,9L54.06,32.82,77.53,46.37Z" fill="currentColor" fill-rule="evenodd"/></svg>
                         </div>
@@ -98,7 +98,7 @@
     
                         <!-- Navbar Login-->
                         <li class="ms-1 d-none d-lg-inline-block">
-                            <a class="nav-link text-body" href="........../login.html">
+                            <a class="nav-link text-body" href="{{ route('login') }}">
                                 Account
                             </a>
                         </li>
@@ -126,7 +126,7 @@
                                     <div class="row mx-0 py-4 g-0 border-bottom">
                                         <div class="col-2 position-relative">
                                             <picture class="d-block ">
-                                                <img class="img-fluid" src="........../assets/images/products/product-cart-1.jpg" alt="HTML Bootstrap Template by Pixel Rocket">
+                                                <img class="img-fluid" src="{{ asset('assets/images/products/product-cart-1.jpg') }}" alt="HTML Bootstrap Template by Pixel Rocket">
                                             </picture>
                                         </div>
                                         <div class="col-9 offset-1">
@@ -144,7 +144,7 @@
                                     <div class="row mx-0 py-4 g-0 border-bottom">
                                         <div class="col-2 position-relative">
                                             <picture class="d-block ">
-                                                <img class="img-fluid" src="........../assets/images/products/product-cart-2.jpg" alt="HTML Bootstrap Template by Pixel Rocket">
+                                                <img class="img-fluid" src="{{ asset('assets/images/products/product-cart-2.jpg') }}" alt="HTML Bootstrap Template by Pixel Rocket">
                                             </picture>
                                         </div>
                                         <div class="col-9 offset-1">
@@ -172,8 +172,8 @@
                                             <p class="m-0 fs-5 fw-bold">$422.99</p>
                                         </div>
                                     </div>
-                                    <a href="........../cart.html" class="btn btn-outline-dark w-100 text-center mt-4" role="button">View Cart</a>
-                                    <a href="........../checkout.html" class="btn btn-dark w-100 text-center mt-2" role="button">Proceed To Checkout</a>
+                                    <a href="{{ route('cart') }}" class="btn btn-outline-dark w-100 text-center mt-4" role="button">View Cart</a>
+                                    <a href="{{ route('checkout') }}" class="btn btn-dark w-100 text-center mt-2" role="button">Proceed To Checkout</a>
                                 </div>
                                 <!-- / Cart Summary-->
                               </div>
@@ -206,15 +206,15 @@
                                                   <div class="col">
                                                       <h6 class="dropdown-heading">Coats & Jackets</h6>
                                                       <ul class="list-unstyled">
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Waterproof Jackets</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Insulated Jackets</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Down Jackets</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Softshell Jackets</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Casual Jackets</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Windproof Jackets</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Breathable Jackets</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Cleaning & Proofing</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item dropdown-link-all" href="........../category.html">View All</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Waterproof Jackets</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Insulated Jackets</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Down Jackets</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Softshell Jackets</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Casual Jackets</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Windproof Jackets</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Breathable Jackets</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Cleaning & Proofing</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item dropdown-link-all" href="{{ route('category') }}">View All</a></li>
                                                       </ul>
                                                   </div>
                                                   <!-- / menu row-->
@@ -223,15 +223,15 @@
                                                   <div class="col">
                                                       <h6 class="dropdown-heading">Insulated</h6>
                                                       <ul class="list-unstyled">
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Insulated Jackets</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Bodywarmers</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Parkas</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Baselayers & Thermals</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Winter Hats</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Scarves & Neck</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Gloves & Mitts</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Accessories</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item dropdown-link-all" href="........../category.html">View All</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Insulated Jackets</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Bodywarmers</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Parkas</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Baselayers & Thermals</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Winter Hats</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Scarves & Neck</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Gloves & Mitts</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Accessories</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item dropdown-link-all" href="{{ route('category') }}">View All</a></li>
                                                       </ul>
                                                   </div>
                                                   <!-- / menu row-->
@@ -240,15 +240,15 @@
                                                   <div class="d-none d-xxl-block col">
                                                       <h6 class="dropdown-heading">Footwear</h6>
                                                       <ul class="list-unstyled">
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Lifestyle & Casual</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Walking Shoes</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Running Shoes</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Military Boots</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Fabric Walking Boots</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Leather Walking Boots</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Wellies</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="........../category.html">Winter Footwear</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item dropdown-link-all" href="........../category.html">View All</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Lifestyle & Casual</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Walking Shoes</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Running Shoes</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Military Boots</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Fabric Walking Boots</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Leather Walking Boots</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Wellies</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item" href="{{ route('category') }}">Winter Footwear</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item dropdown-link-all" href="{{ route('category') }}">View All</a></li>
                                                       </ul>
                                                   </div>
                                                   <!-- / menu row-->  
@@ -257,15 +257,15 @@
                                                   <div class="col">
                                                       <h6 class="dropdown-heading text-danger">Special Offers</h6>
                                                       <ul class="list-unstyled">
-                                                          <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="........../category.html">Insulated Jackets</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="........../category.html">Bodywarmers</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="........../category.html">Parkas</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="........../category.html">Baselayers & Thermals</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="........../category.html">Winter Hats</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="........../category.html">Scarves & Neck</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="........../category.html">Gloves & Mitts</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="........../category.html">Accessories</a></li>
-                                                          <li class="dropdown-list-item"><a class="dropdown-item text-danger dropdown-link-all" href="........../category.html">View All</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="{{ route('category') }}">Insulated Jackets</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="{{ route('category') }}">Bodywarmers</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="{{ route('category') }}">Parkas</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="{{ route('category') }}">Baselayers & Thermals</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="{{ route('category') }}">Winter Hats</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="{{ route('category') }}">Scarves & Neck</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="{{ route('category') }}">Gloves & Mitts</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item text-danger" href="{{ route('category') }}">Accessories</a></li>
+                                                          <li class="dropdown-list-item"><a class="dropdown-item text-danger dropdown-link-all" href="{{ route('category') }}">View All</a></li>
                                                       </ul>
                                                   </div>
                                                   <!-- / menu row-->      
@@ -273,44 +273,44 @@
                                               
                                               <div class="align-items-center justify-content-between mt-5 d-none d-lg-flex">
                                                   <div class="me-5 f-w-20">
-                                                      <a class="d-block" href="........../category.html">
+                                                      <a class="d-block" href="{{ route('category') }}">
                                                           <picture>
-                                                              <img class="img-fluid d-table mx-auto" src="........../assets/images/logos/logo-1.svg" alt="">
+                                                              <img class="img-fluid d-table mx-auto" src="{{ asset('assets/images/logos/logo-1.svg') }}" alt="">
                                                           </picture>
                                                       </a>
                                                   </div>
                                                   <div class="me-5 f-w-20">
-                                                      <a class="d-block" href="........../category.html">
+                                                      <a class="d-block" href="{{ route('category') }}">
                                                           <picture>
-                                                              <img class="img-fluid d-table mx-auto" src="........../assets/images/logos/logo-2.svg" alt="">
+                                                              <img class="img-fluid d-table mx-auto" src="{{ asset('assets/images/logos/logo-2.svg') }}" alt="">
                                                           </picture>
                                                       </a>
                                                   </div>
                                                   <div class="me-5 f-w-20">
-                                                      <a class="d-block" href="........../category.html">
+                                                      <a class="d-block" href="{{ route('category') }}">
                                                           <picture>
-                                                              <img class="img-fluid d-table mx-auto" src="........../assets/images/logos/logo-3.svg" alt="">
+                                                              <img class="img-fluid d-table mx-auto" src="{{ asset('assets/images/logos/logo-3.svg') }}" alt="">
                                                           </picture>
                                                       </a>
                                                   </div>
                                                   <div class="me-5 f-w-20">
-                                                      <a class="d-block" href="........../category.html">
+                                                      <a class="d-block" href="{{ route('category') }}">
                                                           <picture>
-                                                              <img class="img-fluid d-table mx-auto" src="........../assets/images/logos/logo-4.svg" alt="">
+                                                              <img class="img-fluid d-table mx-auto" src="{{ asset('assets/images/logos/logo-4.svg') }}" alt="">
                                                           </picture>
                                                       </a>
                                                   </div>
                                                   <div class="me-5 f-w-20">
-                                                      <a class="d-block" href="........../category.html">
+                                                      <a class="d-block" href="{{ route('category') }}">
                                                           <picture>
-                                                              <img class="img-fluid d-table mx-auto" src="........../assets/images/logos/logo-5.svg" alt="">
+                                                              <img class="img-fluid d-table mx-auto" src="{{ asset('assets/images/logos/logo-5.svg') }}" alt="">
                                                           </picture>
                                                       </a>
                                                   </div>
                                                   <div class="me-5 f-w-20">
-                                                      <a class="d-block" href="........../category.html">
+                                                      <a class="d-block" href="{{ route('category') }}">
                                                           <picture>
-                                                              <img class="img-fluid d-table mx-auto" src="........../assets/images/logos/logo-6.svg" alt="">
+                                                              <img class="img-fluid d-table mx-auto" src="{{ asset('assets/images/logos/logo-6.svg') }}" alt="">
                                                           </picture>
                                                       </a>
                                                   </div>
@@ -325,37 +325,37 @@
                                                       <div class="col-12 col-md-6">
                                                           <div class="card justify-content-center d-flex align-items-center bg-transparent">
                                                               <picture class="w-100 d-block mb-2 mx-auto">
-                                                                  <img class="w-100 rounded" title="" src="........../assets/images/banners/banner-12.jpg" alt="HTML Bootstrap Template by Pixel Rocket">
+                                                                  <img class="w-100 rounded" title="" src="{{ asset('assets/images/banners/banner-12.jpg') }}" alt="HTML Bootstrap Template by Pixel Rocket">
                                                               </picture>
-                                                              <a class="fw-bolder link-cover" href="........../category.html">Latest Arrivals</a>
+                                                              <a class="fw-bolder link-cover" href="{{ route('category') }}">Latest Arrivals</a>
                                                           </div>
                                                       </div>
                                                       <div class="col-12 col-md-6">
                                                           <div class="card justify-content-center d-flex align-items-center bg-transparent">
                                                               <picture class="w-100 d-block mb-2 mx-auto">
-                                                                  <img class="w-100 rounded" title="" src="........../assets/images/banners/banner-13.jpg" alt="HTML Bootstrap Template by Pixel Rocket">
+                                                                  <img class="w-100 rounded" title="" src="{{ asset('assets/images/banners/banner-13.jpg') }}" alt="HTML Bootstrap Template by Pixel Rocket">
                                                               </picture>
-                                                              <a class="fw-bolder link-cover" href="........../category.html">Accessories</a>
+                                                              <a class="fw-bolder link-cover" href="{{ route('category') }}">Accessories</a>
                                                           </div>
                                                       </div>
                                                       <div class="col-12 col-md-6">
                                                           <div class="card justify-content-center d-flex align-items-center bg-transparent">
                                                               <picture class="w-100 d-block mb-2 mx-auto">
-                                                                  <img class="w-100 rounded" title="" src="........../assets/images/banners/banner-14.jpg" alt="HTML Bootstrap Template by Pixel Rocket">
+                                                                  <img class="w-100 rounded" title="" src="{{ asset('assets/images/banners/banner-14.jpg') }}" alt="HTML Bootstrap Template by Pixel Rocket">
                                                               </picture>
-                                                              <a class="fw-bolder link-cover" href="........../category.html">T-Shirts</a>
+                                                              <a class="fw-bolder link-cover" href="{{ route('category') }}">T-Shirts</a>
                                                           </div>
                                                       </div>
                                                       <div class="col-12 col-md-6">
                                                           <div class="card justify-content-center d-flex align-items-center bg-transparent">
                                                               <picture class="w-100 d-block mb-2 mx-auto">
-                                                                  <img class="w-100 rounded" title="" src="........../assets/images/banners/banner-15.jpg" alt="HTML Bootstrap Template by Pixel Rocket">
+                                                                  <img class="w-100 rounded" title="" src="{{ asset('assets/images/banners/banner-15.jpg') }}" alt="HTML Bootstrap Template by Pixel Rocket">
                                                               </picture>
-                                                              <a class="fw-bolder link-cover" href="........../category.html">Jackets</a>
+                                                              <a class="fw-bolder link-cover" href="{{ route('category') }}">Jackets</a>
                                                           </div>
                                                       </div>
                                                   </div>
-                                                  <a href="........../category.html" class="btn btn-link p-0 fw-bolder text-link-border mt-5 text-dark mx-auto d-table">Visit Mens Section</a>
+                                                  <a href="{{ route('category') }}" class="btn btn-link p-0 fw-bolder text-link-border mt-5 text-dark mx-auto d-table">Visit Mens Section</a>
                                               </div>
                                           </div>
                                           <!-- Menswear Dropdown Menu Images Section-->
@@ -369,21 +369,21 @@
                                   Women
                                 </a>
                                 <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="........../category.html">Tops</a></li>
-                                  <li><a class="dropdown-item" href="........../category.html">Bottoms</a></li>
-                                  <li><a class="dropdown-item" href="........../category.html">Jeans</a></li>
-                                  <li><a class="dropdown-item" href="........../category.html">T-Shirts</a></li>
-                                  <li><a class="dropdown-item" href="........../category.html">Shoes</a></li>
-                                  <li><a class="dropdown-item" href="........../category.html">Accessories</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('category') }}">Tops</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('category') }}">Bottoms</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('category') }}">Jeans</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('category') }}">T-Shirts</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('category') }}">Shoes</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('category') }}">Accessories</a></li>
                                 </ul>
                               </li>
                               <li class="nav-item">
-                                <a class="nav-link" href="........../category.html" role="button">
+                                <a class="nav-link" href="{{ route('category') }}" role="button">
                                   Kids
                                 </a>
                               </li>
                               <li class="nav-item">
-                                <a class="nav-link" href="........../category.html" role="button">
+                                <a class="nav-link" href="{{ route('category') }}" role="button">
                                   Sale
                                 </a>
                               </li>
@@ -392,14 +392,14 @@
                                   Pages
                                 </a>
                                 <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="........../index.html">Homepage</a></li>
-                                  <li><a class="dropdown-item" href="........../category.html">Category</a></li>
-                                  <li><a class="dropdown-item" href="........../product.html">Product</a></li>
-                                  <li><a class="dropdown-item" href="........../cart.html">Cart</a></li>
-                                  <li><a class="dropdown-item" href="........../checkout.html">Checkout</a></li>
-                                  <li><a class="dropdown-item" href="........../login.html">Login</a></li>
-                                  <li><a class="dropdown-item" href="........../register.html">Register</a></li>
-                                  <li><a class="dropdown-item" href="........../forgotten-password.html">Forgotten Password</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('index') }}">Homepage</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('category') }}">Category</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('product') }}">Product</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('cart') }}">Cart</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('checkout') }}">Checkout</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
+                                  <li><a class="dropdown-item" href="{{ route('forgotten_password') }}">Forgotten Password</a></li>
                                 </ul>
                               </li>
                           </ul>                    <!-- / Menu-->
@@ -440,22 +440,22 @@
                     <div class="row g-3" data-aos="fade-right">
                         <div class="col-12">
                             <picture>
-                                <img class="img-fluid" data-zoomable src="........../assets/images/products/product-page-1.jpeg" alt="HTML Bootstrap Template by Pixel Rocket">
+                                <img class="img-fluid" data-zoomable src="{{ asset('assets/images/products/product-page-1.jpeg') }}" alt="HTML Bootstrap Template by Pixel Rocket">
                             </picture>
                         </div>
                         <div class="col-12">
                             <picture>
-                                <img class="img-fluid" data-zoomable src="........../assets/images/products/product-page-2.jpeg" alt="HTML Bootstrap Template by Pixel Rocket">
+                                <img class="img-fluid" data-zoomable src="{{ asset('assets/images/products/product-page-2.jpeg') }}" alt="HTML Bootstrap Template by Pixel Rocket">
                             </picture>
                         </div>
                         <div class="col-12">
                             <picture>
-                                <img class="img-fluid" data-zoomable src="........../assets/images/products/product-page-3.jpeg" alt="HTML Bootstrap Template by Pixel Rocket">
+                                <img class="img-fluid" data-zoomable src="{{ asset('assets/images/products/product-page-3.jpeg') }}" alt="HTML Bootstrap Template by Pixel Rocket">
                             </picture>
                         </div>
                         <div class="col-12">
                             <picture>
-                                <img class="img-fluid" data-zoomable src="........../assets/images/products/product-page-4.jpeg" alt="HTML Bootstrap Template by Pixel Rocket">
+                                <img class="img-fluid" data-zoomable src="{{ asset('assets/images/products/product-page-4.jpeg') }}" alt="HTML Bootstrap Template by Pixel Rocket">
                             </picture>
                         </div>
                     </div>
@@ -570,10 +570,10 @@
                                 </small>
                                 <div class="mt-4 d-flex justify-content-start flex-wrap align-items-start">
                                     <picture class="me-2">
-                                        <img class="f-w-24 p-2 bg-light border-bottom border-dark border-2 cursor-pointer" src="........../assets/images/products/product-page-thumb-1.jpeg" alt="HTML Bootstrap Template by Pixel Rocket">
+                                        <img class="f-w-24 p-2 bg-light border-bottom border-dark border-2 cursor-pointer" src="{{ asset('assets/images/products/product-page-thumb-1.jpeg') }}" alt="HTML Bootstrap Template by Pixel Rocket">
                                     </picture>
                                     <picture>
-                                        <img class="f-w-24 p-2 bg-light cursor-pointer" src="........../assets/images/products/product-page-thumb-2.jpeg" alt="HTML Bootstrap Template by Pixel Rocket">
+                                        <img class="f-w-24 p-2 bg-light cursor-pointer" src="{{ asset('assets/images/products/product-page-thumb-2.jpeg') }}" alt="HTML Bootstrap Template by Pixel Rocket">
                                     </picture>
                                 </div>
                             </div>
@@ -707,14 +707,14 @@
                                       </div>
                                       <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i class="ri-heart-line"></i></span>
                                       <picture class="position-relative overflow-hidden d-block bg-light">
-                                          <img class="w-100 img-fluid position-relative z-index-10" title="" src="........../assets/images/products/product-1.jpg" alt="">
+                                          <img class="w-100 img-fluid position-relative z-index-10" title="" src="{{ asset('assets/images/products/product-1.jpg') }}" alt="">
                                       </picture>
                                           <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
                                               <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Quick Add</button>
                                           </div>
                                   </div>
                                   <div class="card-body px-0">
-                                      <a class="text-decoration-none link-cover" href="........../product.html">Nike Air VaporMax 2021</a>
+                                      <a class="text-decoration-none link-cover" href="{{ route('product') }}">Nike Air VaporMax 2021</a>
                                       <small class="text-muted d-block">4 colours, 10 sizes</small>
                                               <p class="mt-2 mb-0 small"><s class="text-muted">$329.99</s> <span class="text-danger">$198.66</span></p>
                                   </div>
@@ -730,14 +730,14 @@
                                       </div>
                                       <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i class="ri-heart-line"></i></span>
                                       <picture class="position-relative overflow-hidden d-block bg-light">
-                                          <img class="w-100 img-fluid position-relative z-index-10" title="" src="........../assets/images/products/product-2.jpg" alt="">
+                                          <img class="w-100 img-fluid position-relative z-index-10" title="" src="{{ asset('assets/images/products/product-2.jpg') }}" alt="">
                                       </picture>
                                           <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
                                               <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Quick Add</button>
                                           </div>
                                   </div>
                                   <div class="card-body px-0">
-                                      <a class="text-decoration-none link-cover" href="........../product.html">Nike ZoomX Vaporfly</a>
+                                      <a class="text-decoration-none link-cover" href="{{ route('product') }}">Nike ZoomX Vaporfly</a>
                                       <small class="text-muted d-block">2 colours, 4 sizes</small>
                                               <p class="mt-2 mb-0 small">$275.45</p>
                                   </div>
@@ -753,11 +753,11 @@
                                       </div>
                                       <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i class="ri-heart-line"></i></span>
                                       <picture class="position-relative overflow-hidden d-block bg-light">
-                                          <img class="w-100 img-fluid position-relative z-index-10" title="" src="........../assets/images/products/product-3.jpg" alt="">
+                                          <img class="w-100 img-fluid position-relative z-index-10" title="" src="{{ asset('assets/images/products/product-3.jpg') }}" alt="">
                                       </picture>
                                   </div>
                                   <div class="card-body px-0">
-                                      <a class="text-decoration-none link-cover" href="........../product.html">Nike Blazer Mid &#x27;77</a>
+                                      <a class="text-decoration-none link-cover" href="{{ route('product') }}">Nike Blazer Mid &#x27;77</a>
                                       <small class="text-muted d-block">5 colours, 6 sizes</small>
                                           <p class="mt-2 mb-0 small text-muted">Sold Out</p>
                                   </div>
@@ -772,14 +772,14 @@
                                       </div>
                                       <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i class="ri-heart-line"></i></span>
                                       <picture class="position-relative overflow-hidden d-block bg-light">
-                                          <img class="w-100 img-fluid position-relative z-index-10" title="" src="........../assets/images/products/product-4.jpg" alt="">
+                                          <img class="w-100 img-fluid position-relative z-index-10" title="" src="{{ asset('assets/images/products/product-4.jpg') }}" alt="">
                                       </picture>
                                           <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
                                               <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Quick Add</button>
                                           </div>
                                   </div>
                                   <div class="card-body px-0">
-                                      <a class="text-decoration-none link-cover" href="........../product.html">Nike Air Force 1</a>
+                                      <a class="text-decoration-none link-cover" href="{{ route('product') }}">Nike Air Force 1</a>
                                       <small class="text-muted d-block">6 colours, 9 sizes</small>
                                               <p class="mt-2 mb-0 small">$425.85</p>
                                   </div>
@@ -795,14 +795,14 @@
                                       </div>
                                       <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i class="ri-heart-line"></i></span>
                                       <picture class="position-relative overflow-hidden d-block bg-light">
-                                          <img class="w-100 img-fluid position-relative z-index-10" title="" src="........../assets/images/products/product-5.jpg" alt="">
+                                          <img class="w-100 img-fluid position-relative z-index-10" title="" src="{{ asset('assets/images/products/product-5.jpg') }}" alt="">
                                       </picture>
                                           <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
                                               <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Quick Add</button>
                                           </div>
                                   </div>
                                   <div class="card-body px-0">
-                                      <a class="text-decoration-none link-cover" href="........../product.html">Nike Air Max 90</a>
+                                      <a class="text-decoration-none link-cover" href="{{ route('product') }}">Nike Air Max 90</a>
                                       <small class="text-muted d-block">4 colours, 10 sizes</small>
                                               <p class="mt-2 mb-0 small"><s class="text-muted">$196.99</s> <span class="text-danger">$98.66</span></p>
                                   </div>
@@ -819,14 +819,14 @@
                                       </div>
                                       <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i class="ri-heart-line"></i></span>
                                       <picture class="position-relative overflow-hidden d-block bg-light">
-                                          <img class="w-100 img-fluid position-relative z-index-10" title="" src="........../assets/images/products/product-6.jpg" alt="">
+                                          <img class="w-100 img-fluid position-relative z-index-10" title="" src="{{ asset('assets/images/products/product-6.jpg') }}" alt="">
                                       </picture>
                                           <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
                                               <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Quick Add</button>
                                           </div>
                                   </div>
                                   <div class="card-body px-0">
-                                      <a class="text-decoration-none link-cover" href="........../product.html">Nike Glide FlyEase</a>
+                                      <a class="text-decoration-none link-cover" href="{{ route('product') }}">Nike Glide FlyEase</a>
                                       <small class="text-muted d-block">1 colour</small>
                                               <p class="mt-2 mb-0 small"><s class="text-muted">$329.99</s> <span class="text-danger">$198.66</span></p>
                                   </div>
@@ -841,14 +841,14 @@
                                       </div>
                                       <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i class="ri-heart-line"></i></span>
                                       <picture class="position-relative overflow-hidden d-block bg-light">
-                                          <img class="w-100 img-fluid position-relative z-index-10" title="" src="........../assets/images/products/product-7.jpg" alt="">
+                                          <img class="w-100 img-fluid position-relative z-index-10" title="" src="{{ asset('assets/images/products/product-7.jpg') }}" alt="">
                                       </picture>
                                           <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
                                               <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Quick Add</button>
                                           </div>
                                   </div>
                                   <div class="card-body px-0">
-                                      <a class="text-decoration-none link-cover" href="........../product.html">Nike Zoom Freak</a>
+                                      <a class="text-decoration-none link-cover" href="{{ route('product') }}">Nike Zoom Freak</a>
                                       <small class="text-muted d-block">2 colours, 2 sizes</small>
                                               <p class="mt-2 mb-0 small">$444.99</p>
                                   </div>
@@ -864,14 +864,14 @@
                                       </div>
                                       <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i class="ri-heart-line"></i></span>
                                       <picture class="position-relative overflow-hidden d-block bg-light">
-                                          <img class="w-100 img-fluid position-relative z-index-10" title="" src="........../assets/images/products/product-8.jpg" alt="">
+                                          <img class="w-100 img-fluid position-relative z-index-10" title="" src="{{ asset('assets/images/products/product-8.jpg') }}" alt="">
                                       </picture>
                                           <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
                                               <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Quick Add</button>
                                           </div>
                                   </div>
                                   <div class="card-body px-0">
-                                      <a class="text-decoration-none link-cover" href="........../product.html">Nike Air Pegasus</a>
+                                      <a class="text-decoration-none link-cover" href="{{ route('product') }}">Nike Air Pegasus</a>
                                       <small class="text-muted d-block">3 colours, 10 sizes</small>
                                               <p class="mt-2 mb-0 small">$178.99</p>
                                   </div>
@@ -887,14 +887,14 @@
                                       </div>
                                       <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i class="ri-heart-line"></i></span>
                                       <picture class="position-relative overflow-hidden d-block bg-light">
-                                          <img class="w-100 img-fluid position-relative z-index-10" title="" src="........../assets/images/products/product-1.jpg" alt="">
+                                          <img class="w-100 img-fluid position-relative z-index-10" title="" src="{{ asset('assets/images/products/product-1.jpg') }}" alt="">
                                       </picture>
                                           <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
                                               <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Quick Add</button>
                                           </div>
                                   </div>
                                   <div class="card-body px-0">
-                                      <a class="text-decoration-none link-cover" href="........../product.html">Nike Air Jordans</a>
+                                      <a class="text-decoration-none link-cover" href="{{ route('product') }}">Nike Air Jordans</a>
                                       <small class="text-muted d-block">3 colours, 10 sizes</small>
                                               <p class="mt-2 mb-0 small">$154.99</p>
                                   </div>
@@ -1263,10 +1263,10 @@
 
     <!-- Theme JS -->
     <!-- Vendor JS -->
-    <script src="........../assets/js/vendor.bundle.js"></script>
+    <script src="{{ asset('assets/js/vendor.bundle.js"></script>
     
     <!-- Theme JS -->
-    <script src="........../assets/js/theme.bundle.js"></script>
+    <script src="{{ asset('assets/js/theme.bundle.js"></script>
 </body>
 
 </html>
