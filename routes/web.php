@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
     return view('home');
@@ -19,8 +21,16 @@ Route::get('/forgotten_password', [PageController::class, 'forgotten_password'])
 Route::get('/login', [PageController::class, 'login'])->name('login');
 Route::get('/product', [PageController::class, 'product'])->name('product');
 Route::get('/register', [PageController::class, 'register'])->name('register');
-Route::get('/category', [PageController::class, 'category'])->name('category');
+// Route::get('/category', [PageController::class, 'category'])->name('category');
 
+// //Route ProductController
+// Route::get('/product', [ProductController::class, 'index'])->name('product');
+
+//Route Category Controller
+Route::get('/category', [CategoryController::class, 'index'])->name('category');
+
+
+//Route AuthController
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
