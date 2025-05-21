@@ -26,6 +26,8 @@
     <script src="{{ asset('assets/js/theme.bundle.js') }}"></script>
     <!-- Vendor JS -->
     <script src="{{ asset('assets/js/vendor.bundle.js') }}"></script>
+    @yield('scripts')
+
 </body>
 
 </html>

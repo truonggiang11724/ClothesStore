@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('layouts.cart')
+    @include('layouts.list_order')
 @endsection

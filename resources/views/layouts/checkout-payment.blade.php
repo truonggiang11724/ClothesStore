@@ -69,8 +69,8 @@
                                 <li class="me-4"><a class="nav-link-checkout "
                                         href="{{ route('checkout') }}">Information</a></li>
                                 <li class="me-4"><a class="nav-link-checkout "
-                                        href="{{ route('checkout_shipping') }}">Shipping</a></li>
-                                <li><a class="nav-link-checkout nav-link-last active"
+                                        {{-- href="{{ route('checkout_shipping') }}">Shipping</a></li>
+                                <li><a class="nav-link-checkout nav-link-last active" --}}
                                         href="{{ route('checkout_shipping') }}">Payment</a></li>
                             </ul>
                         </nav>                        <div class="mt-5">

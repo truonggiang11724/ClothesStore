@@ -19,7 +19,7 @@ class ProductSeeder extends Seeder
             'description' => 'Thông tin phát hành Nike Vapor Golf Wide ‘White’ Thương hiệu: Nike Thiết kế: Nike Vapor Mã sản phẩm: AQ2301-100 Xuất xứ : Mỹ Phân loại: Giày Golf',
             'price' => 350000,
             'size' => 40,
-            'image' => 'shirt1.jpg',
+            'image' => 'assets/images/products/product-11.jpg',
         ]);
     
         Product::create([
@@ -27,7 +27,7 @@ class ProductSeeder extends Seeder
             'description' => 'Giày Nike Air VaporMax 2023 Flyknit ‘Coconut Milk Olive’ DV1678-101 là một phiên bản mới của dòng Air',
             'price' => 420000,
             'size' => 40,
-            'image' => 'dress1.jpg',
+            'image' => 'assets/images/products/product-2.jpg',
         ]);
     }
 }

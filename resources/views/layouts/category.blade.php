@@ -1,7 +1,3 @@
-
-
-
-
 <!-- Main Section-->
 <section class="mt-0 ">
     <!-- Page Content Goes Here -->
@@ -37,6 +33,33 @@
             </div>
             <div class="d-flex justify-content-end align-items-center mt-4 mt-lg-0 flex-column flex-md-row">
 
+                <form method="GET" action="{{ url('/category') }}"
+                    class="d-flex fs-7 lh-1 w-100 mb-2 mb-md-0 w-md-auto" style="height: 48px">
+                    <div class="" style="height: 48px">
+                        <input style="height: 48px;width:140px;" type="text" name="search" class="form-control"
+                            placeholder="Tìm sản phẩm..." value="{{ request('search') }}">
+                    </div>
+
+                    <div class="" style="height: 48px">
+                        <button type="submit" class="btn btn-primary"
+                            style="margin: 0 10px;height:48px;line-height:12px">Lọc</button>
+                    </div>
+                </form>
+
+                {{-- 
+                                    <div class="">
+                        <select name="category" class="form-control">
+                            <option value="">-- Tất cả danh mục --</option>
+                            @foreach ($categories as $cat)
+                                <option value="{{ $cat->id }}" {{ request('category') == $cat->id ? 'selected' : '' }}>
+                                    {{ $cat->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                --}}
+
+
                 <!-- Filter Trigger-->
                 <button
                     class="btn bg-light p-3 me-md-3 d-flex align-items-center fs-7 lh-1 w-100 mb-2 mb-md-0 w-md-auto "
@@ -59,54 +82,125 @@
 
         <!-- Products-->
         <div class="row g-4">
-            {{-- Test Card Product --}}
-
-            @foreach ($products as $product)
-            <div class="col-12 col-sm-6 col-lg-4">
-                <!-- Card Product-->
-                <div class="card border border-transparent position-relative overflow-hidden h-100 transparent">
-                    <div class="card-img position-relative">
-                        <div class="card-badges">
-                            <span class="badge badge-card"><span
-                                    class="f-w-2 f-h-2 bg-danger rounded-circle d-block me-1"></span> Sale</span>
-                        </div>
-                        <span class="position-absolute top-0 end-0 p-2 z-index-20 text-muted"><i
-                                class="ri-heart-line"></i></span>
-                        <picture class="position-relative overflow-hidden d-block bg-light">
-                            @if ($product->image)
-                            <img class="w-100 img-fluid position-relative z-index-10" title=""
-                                src="{{  asset($product->image) }}" alt="">
-                                @endif
-                        </picture>
-                        <div class="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
-                            <button class="btn btn-quick-add"><i class="ri-add-line me-2"></i> Quick Add</button>
-                        </div>
-                    </div>
-                    <div class="card-body px-0">
-                        <a class="text-decoration-none link-cover" href="{{ route('product') }}">{{ $product->name }}</a>
-                        <small class="text-muted d-block">{{ $product->description }}</small>
-                        <p class="mt-2 mb-0 small"><s class="text-muted">{{ number_format($product->price) }}₫</s> <span
-                                class="text-danger">{{ number_format($product->price*$product->promote) }}₫</span></p>
-                    </div>
-                </div>
-                <!--/ Card Product-->
+            {{-- Cards Product --}}
+            <div class="row" id="product-container">
+                @include('partials.product-list', ['products' => $products])
             </div>
-            @endforeach
         </div>
-        <!-- / Products-->
 
-        <!-- Pagination-->
-        <div class="d-flex flex-column f-w-44 mx-auto my-5 text-center">
-            <small class="text-muted">Showing 9 of 121 products</small>
-            <div class="progress f-h-1 mt-3">
-                <div class="progress-bar bg-dark" role="progressbar" style="width: 25%" aria-valuenow="25"
-                    aria-valuemin="0" aria-valuemax="100"></div>
+
+
+        <!-- / Products-->
+        @if ($products->hasMorePages())
+            <!-- Pagination-->
+            <div class="d-flex flex-column f-w-44 mx-auto my-5 text-center">
+                <small class="text-muted">Showing 9 of 121 products</small>
+                <div class="progress f-h-1 mt-3">
+                    <div class="progress-bar bg-dark" role="progressbar" style="width: 25%" aria-valuenow="25"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <button id="load-more" data-next-page="{{ $products->currentPage() + 1 }}" href="#"
+                    class="btn btn-outline-dark btn-sm mt-5 align-self-center py-3 px-4 border-2">Load
+                    More</button>
             </div>
-            <a href="#" class="btn btn-outline-dark btn-sm mt-5 align-self-center py-3 px-4 border-2">Load
-                More</a>
-        </div> <!-- / Pagination-->
+        @endif
+        <!-- / Pagination-->
+
     </div>
 
     <!-- /Page Content -->
 </section>
 <!-- / Main Section-->
+@section('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('#load-more').on('click', function() {
+            let button = $(this);
+            let nextPage = button.data('next-page');
+            let baseUrl = new URL(window.location.href);
+            baseUrl.searchParams.set('page', nextPage);
+            let finalUrl = baseUrl.toString();
+
+            $.ajax({
+                url: finalUrl,
+                type: 'GET',
+                beforeSend: function() {
+                    button.text('Đang tải...');
+                },
+                success: function(data) {
+                    $('#product-container').append(data);
+                    button.data('next-page', nextPage + 1);
+
+                    // Ẩn nút nếu không còn trang tiếp theo
+                    $.get('?page=' + (nextPage + 1), function(response) {
+                        if (response.trim() === '') {
+                            button.remove();
+                        } else {
+                            button.text('Load more');
+                        }
+                    });
+                },
+                error: function() {
+                    button.text('Tải thất bại!');
+                }
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @auth
+        <script>
+            $(document).on('click', '.add-to-cart-btn', function() {
+                const button = $(this);
+                const id = button.data('id');
+                const name = button.data('name');
+                const price = button.data('price');
+                const image = button.data('image');
+
+                $.ajax({
+                    url: '{{ route('cart.add') }}',
+                    method: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: id,
+                        name: name,
+                        price: price,
+                        image: image,
+                        quantity: 1
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'success',
+                                title: response.message,
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+
+                            $('#cart-count').text(response.totalQuantity);
+                        }
+                    }
+                });
+            });
+        </script>
+    @endauth
+    @guest
+        <script>
+            $(document).on('click', '.add-to-cart-btn', function() {
+                const button = $(this);
+
+                $.ajax({
+                    url: '{{ route('login') }}',
+                    method: 'GET',
+                    data: {
+                    },
+                    success: function(response) {
+                        // Chuyển hướng đến trang đăng nhập
+                        window.location.href = '{{ route('login') }}'; // hoặc '/login'
+                    }
+                });
+            });
+        </script>
+    @endguest
+@endsection

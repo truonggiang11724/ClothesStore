@@ -30,7 +30,7 @@
                     <!-- /Mobile Nav Toggler-->
 
                     <!-- Navbar Search-->
-                    <li class="d-none d-sm-block">
+                    {{-- <li class="d-none d-sm-block">
                         <span class="nav-link text-body search-trigger cursor-pointer">Search</span>
 
                         <!-- Search navbar overlay-->
@@ -48,129 +48,58 @@
                         <div class="search-overlay"></div>
                         <!-- / Search navbar overlay-->
 
-                    </li>
+                    </li> --}}
                     <!-- /Navbar Search-->
+                    {{-- View List Order --}}
+                    <li class="d-none d-sm-block">
+                        <a href="{{ route('list_order') }}" style="text-decoration: none"><span class="nav-link text-body search-trigger cursor-pointer">Order List</span></a>
+                    </li>
+
                     <!-- Settings Dropdown -->
                     <!-- Navbar Account-->
                     <div class="collapse navbar-collapse navbar-collapse-light w-auto flex-grow-1 order-2 order-lg-1"
-                    id="navbarNavDropdown">
-                    <!-- Menu-->
-                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                @auth
-                                {{ Auth::user()->name }}
-                                 @endauth
-                                 @guest
-                                Account
-                             @endguest
-                            </a>
-                            <ul class="dropdown-menu">
-                                @auth
-                                <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
-                                <li>
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                           onclick="event.preventDefault(); this.closest('form').submit();">
-                                            {{ __('Log Out') }}
-                                        </a>
-                                    </form>
-                                </li>
-                                @endauth
-                                @guest
-                                <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
-                                @endguest
-                            </ul>
-                        </li>
-                    </ul>
+                        id="navbarNavDropdown">
+                        <!-- Menu-->
+                        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    @auth
+                                        {{ Auth::user()->name }}
+                                    @endauth
+                                    @guest
+                                        Account
+                                    @endguest
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @auth
+                                        <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
+                                        <li>
+                                            <form method="POST" action="{{ route('logout') }}">
+                                                @csrf
+                                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                                    onclick="event.preventDefault(); this.closest('form').submit();">
+                                                    {{ __('Log Out') }}
+                                                </a>
+                                            </form>
+                                        </li>
+                                    @endauth
+                                    @guest
+                                        <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+                                    @endguest
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
 
                     <!-- /Navbar Login-->
 
                     <!-- Navbar Cart Icon-->
                     <li class="ms-1 d-inline-block position-relative dropdown-cart">
-                        <button class="nav-link me-0 disable-child-pointer border-0 p-0 bg-transparent text-body"
-                            type="button">
-                            Bag (2)
-                        </button>
-                        <div class="cart-dropdown dropdown-menu">
-
-                            <!-- Cart Header-->
-                            <div class="d-flex justify-content-between align-items-center border-bottom pt-3 pb-4">
-                                <h6 class="fw-bolder m-0">Cart Summary (2 items)</h6>
-                                <i class="ri-close-circle-line text-muted ri-lg cursor-pointer btn-close-cart"></i>
-                            </div>
-                            <!-- / Cart Header-->
-
-                            <!-- Cart Items-->
-                            <div>
-
-                                <!-- Cart Product-->
-                                <div class="row mx-0 py-4 g-0 border-bottom">
-                                    <div class="col-2 position-relative">
-                                        <picture class="d-block ">
-                                            <img class="img-fluid"
-                                                src="{{ asset('assets/images/products/product-cart-1.jpg') }}"
-                                                alt="HTML Bootstrap Template by Pixel Rocket">
-                                        </picture>
-                                    </div>
-                                    <div class="col-9 offset-1">
-                                        <div>
-                                            <h6 class="justify-content-between d-flex align-items-start mb-2">
-                                                Nike Air VaporMax 2021
-                                                <i class="ri-close-line ms-3"></i>
-                                            </h6>
-                                            <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: 9 /
-                                                Qty: 1</span>
-                                        </div>
-                                        <p class="fw-bolder text-end text-muted m-0">$85.00</p>
-                                    </div>
-                                </div>
-                                <!-- Cart Product-->
-                                <div class="row mx-0 py-4 g-0 border-bottom">
-                                    <div class="col-2 position-relative">
-                                        <picture class="d-block ">
-                                            <img class="img-fluid"
-                                                src="{{ asset('assets/images/products/product-cart-2.jpg') }}"
-                                                alt="HTML Bootstrap Template by Pixel Rocket">
-                                        </picture>
-                                    </div>
-                                    <div class="col-9 offset-1">
-                                        <div>
-                                            <h6 class="justify-content-between d-flex align-items-start mb-2">
-                                                Nike ZoomX Vaporfly
-                                                <i class="ri-close-line ms-3"></i>
-                                            </h6>
-                                            <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: 11 /
-                                                Qty: 1</span>
-                                        </div>
-                                        <p class="fw-bolder text-end text-muted m-0">$125.00</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /Cart Items-->
-
-                            <!-- Cart Summary-->
-                            <div>
-                                <div class="pt-3">
-                                    <div
-                                        class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-start mb-4 mb-md-2">
-                                        <div>
-                                            <p class="m-0 fw-bold fs-5">Grand Total</p>
-                                            <span class="text-muted small">Inc $45.89 sales tax</span>
-                                        </div>
-                                        <p class="m-0 fs-5 fw-bold">$422.99</p>
-                                    </div>
-                                </div>
-                                <a href="{{ route('cart') }}" class="btn btn-outline-dark w-100 text-center mt-4"
-                                    role="button">View Cart</a>
-                                <a href="{{ route('checkout') }}" class="btn btn-dark w-100 text-center mt-2"
-                                    role="button">Proceed To Checkout</a>
-                            </div>
-                            <!-- / Cart Summary-->
-                        </div>
+                        <a class="nav-link me-0 disable-child-pointer border-0 p-0 bg-transparent text-body"
+                            href="{{ route('cart') }}">
+                            Cart
+                        </a>
 
 
                     </li>
