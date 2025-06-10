@@ -8,6 +8,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Middleware\IsAdmin;
 
 Route::get('/', function () {
     return view('home');
@@ -31,9 +33,9 @@ Route::get('/register', [PageController::class, 'register'])->name('register');
 Route::get('/product/{id}', [ProductController::class, 'detail'])->name('products.detail');
 
 //Route AuthController
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -69,3 +71,9 @@ Route::middleware('auth')->group(function () {
 Route::post('/checkout/index', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 Route::get('/checkout/vnPayCheck', [CheckoutController::class, 'vnPayCheck'])->name('checkout.vnpay');
+
+//Route DashboardController
+Route::middleware(['auth', IsAdmin::class])
+    ->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    });
