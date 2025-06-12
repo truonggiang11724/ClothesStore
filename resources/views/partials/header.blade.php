@@ -50,7 +50,7 @@
                     {{-- View List Order --}}
                     <li class="d-none d-sm-block">
                         <a href="{{ route('list_order') }}" style="text-decoration: none"><span
-                                class="nav-link text-body search-trigger cursor-pointer">Order List</span></a>
+                                class="nav-link text-body search-trigger cursor-pointer">Đơn hàng</span></a>
                     </li>
 
                     <!-- Settings Dropdown -->
@@ -66,12 +66,12 @@
                                         {{ Auth::user()->name }}
                                     @endauth
                                     @guest
-                                        Account
+                                        Tài khoản
                                     @endguest
                                 </a>
                                 <ul class="dropdown-menu">
                                     @auth
-                                        <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Trang cá nhân</a></li>
                                         <li>
                                             <form method="POST" action="{{ route('logout') }}">
                                                 @csrf
@@ -115,7 +115,7 @@
                         <li class="nav-item dropdown dropdown position-static">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                Men
+                                Đồ nam
                             </a>
                             <!-- Menswear dropdown menu-->
                             <div class="dropdown-menu dropdown-megamenu">
@@ -383,7 +383,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                Women
+                                Đồ nữ
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{{ route('category') }}">Tops</a></li>
@@ -396,18 +396,18 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('category') }}" role="button">
-                                Kids
+                                Đồ trẻ em
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('category') }}" role="button">
-                                Sale
+                                Bán hàng
                             </a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                Pages
+                                
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{{ route('home') }}">Homepage</a></li>
