@@ -53,7 +53,7 @@ class CategoryController extends Controller
             $query->latest(); // mặc định sản phẩm mới nhất
         }
 
-        $products = $query->paginate(1);
+        $products = $query->paginate(6);
         $categories = Category::all();
 
         if ($request->ajax()) {

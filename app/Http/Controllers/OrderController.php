@@ -58,7 +58,7 @@ class OrderController extends Controller
 
         $totalPrice = collect($cart)->reduce(fn($sum, $item) => $sum + $item['price'] * $item['quantity'], 0);
         if ($request->payment_method == 'cod')
-            $order_status = 'Đang giao';
+            $order_status = 'Đang giao hàng';
         else $order_status = 'Chưa thanh toán';
         $order = Order::create([
             'customer_id' => $request->customer_id,

@@ -8,7 +8,8 @@
                 <!-- Logo-->
                 <a class="navbar-brand fw-bold fs-3 m-0 p-0 flex-shrink-0 order-0" href="{{ route('home') }}">
                     <div class="d-flex align-items-center">
-                        <img class="f-w-36" src="https://theme.hstatic.net/200000265619/1001353407/14/logo.png?v=355" alt="">
+                        <img class="f-w-36" src="https://theme.hstatic.net/200000265619/1001353407/14/logo.png?v=355"
+                            alt="">
                     </div>
                 </a>
                 <!-- / Logo-->
@@ -48,7 +49,8 @@
                     <!-- /Navbar Search-->
                     {{-- View List Order --}}
                     <li class="d-none d-sm-block">
-                        <a href="{{ route('list_order') }}" style="text-decoration: none"><span class="nav-link text-body search-trigger cursor-pointer">Order List</span></a>
+                        <a href="{{ route('list_order') }}" style="text-decoration: none"><span
+                                class="nav-link text-body search-trigger cursor-pointer">Order List</span></a>
                     </li>
 
                     <!-- Settings Dropdown -->
@@ -417,6 +419,7 @@
                                 <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
                                 <li><a class="dropdown-item" href="{{ route('forgotten_password') }}">Forgotten
                                         Password</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard (Admin)</a></li>
                             </ul>
                         </li>
                     </ul> <!-- / Menu-->

@@ -7,31 +7,33 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
-use Carbon\Carbon;
 use App\Models\OrderItem;
+use Illuminate\Support\Facades\DB;
+
 
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $now = Carbon::now();
-        $startOfMonth = now()->startOfMonth();
-        $endOfMonth = now()->endOfMonth();
-
         // Tổng đơn hàng trong tháng hiện tại
-        $totalMonthlyOrders = Order::whereBetween('created_at', [$startOfMonth, $endOfMonth])->count();
+        $totalMonthlyOrders = DB::table('orders')
+            ->whereMonth('created_at', date('m'))
+            ->whereYear('created_at', date('Y'))
+            ->count();
 
         // Doanh thu tháng này (chỉ đơn đã hoàn thành)
-        $monthlyRevenue = Order::whereBetween('created_at', [$startOfMonth, $endOfMonth])
-            ->where('order_status', 'Chưa thanh toán')
+        $monthlyRevenue = DB::table('orders')
+            ->whereMonth('created_at', date('m'))
+            ->whereYear('created_at', date('Y'))
             ->sum('total_price');
 
         // Tổng sản phẩm bán ra tháng này
-        $productsSold = OrderItem::whereHas('order', function ($query) use ($startOfMonth, $endOfMonth) {
-            $query->whereBetween('created_at', [$startOfMonth, $endOfMonth])
-                ->where('order_status', 'Chưa thanh toán');
-        })->sum('quantity');
+        $productsSold = DB::table('order_items')
+            ->join('orders', 'order_items.order_id', '=', 'orders.id')
+            ->whereMonth('orders.created_at', date('m'))
+            ->whereYear('orders.created_at', date('Y'))
+            ->sum('order_items.quantity');
 
 
         return view('admin.dashboard', compact('totalMonthlyOrders', 'monthlyRevenue', 'productsSold'));

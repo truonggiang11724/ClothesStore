@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PageController;
@@ -9,6 +10,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Middleware\IsAdmin;
 
 Route::get('/', function () {
@@ -77,3 +80,36 @@ Route::middleware(['auth', IsAdmin::class])
     ->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     });
+
+//Route AdminController
+Route::middleware(['auth', IsAdmin::class])
+    ->group(function () {
+        Route::get('/admin/product', [ProductController::class, 'index'])->name('admin.product');
+        Route::get('/admin/product/create', [ProductController::class, 'create'])->name('admin.product.create');
+        Route::get('/admin/product/edit', [ProductController::class, 'edit'])->name('admin.product.edit');
+        Route::post('/admin/product/destroy', [ProductController::class, 'destroy'])->name('admin.product.destroy');
+        Route::post('/admin/product/store', [ProductController::class, 'store'])->name('admin.product.store');
+        Route::post('/admin/product/update', [ProductController::class, 'update'])->name('admin.product.update');
+    });
+
+// Route CouponController,OrderController
+Route::middleware(['auth', IsAdmin::class])->prefix('admin')->group(function () {
+    Route::get('/coupons', [AdminOrderController::class, 'index'])->name('admin.coupon');
+    Route::get('/coupons/create', [AdminOrderController::class, 'create'])->name('admin.coupon.create');
+    Route::post('/coupons/store', [AdminOrderController::class, 'store'])->name('admin.coupon.store');
+    Route::get('/coupons/edit', [AdminOrderController::class, 'edit'])->name('admin.coupon.edit');
+    Route::post('/coupons/update', [AdminOrderController::class, 'update'])->name('admin.coupon.update');
+    Route::post('/coupons/delete', [AdminOrderController::class, 'destroy'])->name('admin.coupon.delete');
+    Route::get('/admin/orders', [AdminOrderController::class, 'index'])->name('admin.orders');
+    Route::post('/admin/orders/deliver', [AdminOrderController::class, 'markDelivered'])->name('admin.orders.deliver');
+});
+
+//Route CategoryController
+Route::get('/admin/categories', [AdminCategoryController::class, 'index'])->name('admin.categories');
+Route::get('/admin/categories/create', [AdminCategoryController::class, 'create'])->name('admin.categories.create');
+Route::post('/admin/categories/store', [AdminCategoryController::class, 'store'])->name('admin.categories.store');
+Route::get('/admin/categories/edit/{id}', [AdminCategoryController::class, 'edit'])->name('admin.categories.edit');
+Route::post('/admin/categories/update/{id}', [AdminCategoryController::class, 'update'])->name('admin.categories.update');
+Route::post('/admin/categories/delete/{id}', [AdminCategoryControllerr::class, 'destroy'])->name('admin.categories.delete');
+
+

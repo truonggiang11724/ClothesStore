@@ -25,7 +25,7 @@
                 <div class="position-absolute start-0 bottom-0 end-0 z-index-40 p-2">
                     <button class="add-to-cart-btn btn btn-quick-add"
                  data-id="{{ $product->id }}" data-name="{{ $product->name }}" data-price="{{ $product->price }}" data-image="{{ $product->image}}">
-                    <i class="ri-add-line me-2 z-index-20"></i> Thêm vào giỏ hàng
+                    Thêm vào giỏ hàng
                 </button>
                 </div>
                 
