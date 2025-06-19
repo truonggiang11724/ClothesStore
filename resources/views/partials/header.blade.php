@@ -22,7 +22,7 @@
                         <span class="nav-link text-body d-flex align-items-center cursor-pointer"
                             data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"><i
-                                class="ri-menu-line ri-lg me-1"></i> Menu</span>
+                                class="ri-menu-line ri-lg me-1"></i> Lựa chọn</span>
                     </li>
                     <!-- /Mobile Nav Toggler-->
 
@@ -77,13 +77,13 @@
                                                 @csrf
                                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                                     onclick="event.preventDefault(); this.closest('form').submit();">
-                                                    {{ __('Log Out') }}
+                                                    {{ __('Đăng xuất') }}
                                                 </a>
                                             </form>
                                         </li>
                                     @endauth
                                     @guest
-                                        <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('login') }}">Đăng nhập</a></li>
                                     @endguest
                                 </ul>
                             </li>
@@ -96,7 +96,7 @@
                     <li class="ms-1 d-inline-block position-relative dropdown-cart">
                         <a class="nav-link me-0 disable-child-pointer border-0 p-0 bg-transparent text-body"
                             href="{{ route('cart') }}">
-                            Cart
+                            Giỏ hàng
                         </a>
 
 
@@ -181,7 +181,7 @@
                                                                 href="{{ route('category') }}">Accessories</a></li>
                                                         <li class="dropdown-list-item"><a
                                                                 class="dropdown-item dropdown-link-all"
-                                                                href="{{ route('category') }}">View All</a></li>
+                                                                href="{{ route('category') }}">Xem tất cả</a></li>
                                                     </ul>
                                                 </div>
                                                 <!-- / menu row-->
@@ -212,7 +212,7 @@
                                                         </li>
                                                         <li class="dropdown-list-item"><a
                                                                 class="dropdown-item dropdown-link-all"
-                                                                href="{{ route('category') }}">View All</a></li>
+                                                                href="{{ route('category') }}">Xem tất cả</a></li>
                                                     </ul>
                                                 </div>
                                                 <!-- / menu row-->
@@ -249,7 +249,7 @@
                                                                 href="{{ route('category') }}">Accessories</a></li>
                                                         <li class="dropdown-list-item"><a
                                                                 class="dropdown-item text-danger dropdown-link-all"
-                                                                href="{{ route('category') }}">View All</a></li>
+                                                                href="{{ route('category') }}">Xem tất cả</a></li>
                                                     </ul>
                                                 </div>
                                                 <!-- / menu row-->
@@ -407,18 +407,17 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                
+                                Menu
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ route('home') }}">Homepage</a></li>
-                                <li><a class="dropdown-item" href="{{ route('category') }}">Category</a></li>
-                                <li><a class="dropdown-item" href="{{ route('product') }}">Product</a></li>
-                                <li><a class="dropdown-item" href="{{ route('cart') }}">Cart</a></li>
-                                <li><a class="dropdown-item" href="{{ route('checkout') }}">Checkout</a></li>
-                                <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
-                                <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
-                                <li><a class="dropdown-item" href="{{ route('forgotten_password') }}">Forgotten
-                                        Password</a></li>
+                                <li><a class="dropdown-item" href="{{ route('home') }}">Trang chủ</a></li>
+                                <li><a class="dropdown-item" href="{{ route('category') }}">Trang loại hàng</a></li>
+                                <li><a class="dropdown-item" href="{{ route('product') }}">Trang sản phẩm</a></li>
+                                <li><a class="dropdown-item" href="{{ route('cart') }}">Giỏ hàng</a></li>
+                                <li><a class="dropdown-item" href="{{ route('checkout') }}">Thanh toán</a></li>
+                                <li><a class="dropdown-item" href="{{ route('login') }}">Đăng nhập</a></li>
+                                <li><a class="dropdown-item" href="{{ route('register') }}">Đăng kí</a></li>
+                                <li><a class="dropdown-item" href="{{ route('forgotten_password') }}">Quên mật khẩu</a></li>
                                 <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard (Admin)</a></li>
                             </ul>
                         </li>

@@ -90,6 +90,11 @@ Route::middleware(['auth', IsAdmin::class])
         Route::post('/admin/product/destroy', [ProductController::class, 'destroy'])->name('admin.product.destroy');
         Route::post('/admin/product/store', [ProductController::class, 'store'])->name('admin.product.store');
         Route::post('/admin/product/update', [ProductController::class, 'update'])->name('admin.product.update');
+        Route::get('/admin/chart-data', [DashboardController::class, 'getMonthlyRevenueData']);
+        Route::get('/admin/chart-category-monthly', [DashboardController::class, 'getProductCategoryMonthlyData'])
+            ->name('admin.chart.category-monthly');
+        Route::get('/admin/chart-category-structure', [DashboardController::class, 'getCategoryStructure'])
+            ->name('admin.chart.category-structure');
     });
 
 // Route CouponController,OrderController
@@ -110,6 +115,4 @@ Route::get('/admin/categories/create', [AdminCategoryController::class, 'create'
 Route::post('/admin/categories/store', [AdminCategoryController::class, 'store'])->name('admin.categories.store');
 Route::get('/admin/categories/edit/{id}', [AdminCategoryController::class, 'edit'])->name('admin.categories.edit');
 Route::post('/admin/categories/update/{id}', [AdminCategoryController::class, 'update'])->name('admin.categories.update');
-Route::post('/admin/categories/delete/{id}', [AdminCategoryControllerr::class, 'destroy'])->name('admin.categories.delete');
-
-
+Route::post('/admin/categories/delete/{id}', [AdminCategoryController::class, 'destroy'])->name('admin.categories.delete');

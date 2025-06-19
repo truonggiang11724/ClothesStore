@@ -58,6 +58,8 @@
     <!-- Custom js for this page -->
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
     <script src="{{ asset('assets/js/todolist.js') }}"></script>
+    <script src="{{ asset('assets/js/misc.js') }}"></script>
+    <script src="{{ asset('assets/js/chart.js') }}"></script>
     <!-- End custom js for this page -->
   </body>
 </html>

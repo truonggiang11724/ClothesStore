@@ -5,10 +5,10 @@ $(function () {
    */
   'use strict';
   var data = {
-    labels: ["2013", "2014", "2014", "2015", "2016", "2017"],
+    labels: ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12"],
     datasets: [{
-      label: '# of Votes',
-      data: [10, 19, 3, 5, 2, 3],
+      label: 'Doanh thu (VND)',
+      data: [],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
@@ -480,6 +480,13 @@ $(function () {
       data: data,
       options: options
     });
+    // Sau khi tạo biểu đồ, fetch dữ liệu từ Laravel
+    fetch('/admin/chart-data')
+      .then(response => response.json())
+      .then(result => {
+        lineChart.data.datasets[0].data = result;
+        lineChart.update();
+      });
   }
 
   if ($("#lineChartDark").length) {
@@ -572,3 +579,4 @@ $(function () {
     });
   }
 });
+
