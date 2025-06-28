@@ -46,7 +46,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Page Title -->
-    <title>OldSkool | Bootstrap 5 HTML Template</title>
+    <title>Sneaker Buzz</title>
 
 </head>
 
@@ -73,10 +73,10 @@
                         <nav class="d-none d-md-block">
                             <ul
                                 class="list-unstyled d-flex justify-content-start mt-4 align-items-center fw-bolder small">
-                                <li class="me-4"><a class="nav-link-checkout " href="{{ route('cart') }}">Your
-                                        Cart</a></li>
+                                <li class="me-4"><a class="nav-link-checkout " href="{{ route('cart') }}">Giỏ hàng</a>
+                                </li>
                                 <li class="me-4"><a class="nav-link-checkout active"
-                                        href="{{ route('checkout') }}">Information</a></li>
+                                        href="{{ route('checkout') }}">Thông tin</a></li>
                                 {{-- <li class="me-4"><a class="nav-link-checkout "
                                         href="{{ route('checkout_shipping') }}">Shipping</a></li>
                                 <li><a class="nav-link-checkout nav-link-last "
@@ -88,9 +88,7 @@
                             <div class="mt-5">
                                 <!-- Checkout Panel Information-->
                                 <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-4">
-                                    <h3 class="fs-5 fw-bolder m-0 lh-1">Contact Information</h3>
-                                    <small class="text-muted fw-bolder">Already registered? <a
-                                            href="{{ route('login') }}">Login</a></small>
+                                    <h3 class="fs-5 fw-bolder m-0 lh-1">Thông tin giao hàng</h3>
                                 </div>
 
                                 <div class="row">
@@ -100,7 +98,7 @@
                                     <!-- First Name-->
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="firstNameBilling" class="form-label">First name</label>
+                                            <label for="firstNameBilling" class="form-label">Họ</label>
                                             <input type="text" class="form-control" id="firstNameBilling"
                                                 placeholder="" name="firstname" required="">
                                         </div>
@@ -109,7 +107,7 @@
                                     <!-- Last Name-->
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="lastNameBilling" class="form-label">Last name</label>
+                                            <label for="lastNameBilling" class="form-label">Tên</label>
                                             <input type="text" class="form-control" id="lastNameBilling"
                                                 placeholder="" name="lastname" required="">
                                         </div>
@@ -118,7 +116,7 @@
                                     {{-- Phone number --}}
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="Phonenumber" class="form-label">Phone number</label>
+                                            <label for="Phonenumber" class="form-label">Số điện thoại</label>
                                             <input type="text" class="form-control" id="Phonenumber" placeholder=""
                                                 name="phonenumber" required="">
                                         </div>
@@ -184,7 +182,8 @@
                                     </div>
                                 </div>
                                 {{-- Phương thức thanh toántoán --}}
-                                <h3 class="fs-5 mt-5 fw-bolder mb-4 border-bottom pb-4">Chọn phương thức thanh toán</h3>
+                                <h3 class="fs-5 mt-5 fw-bolder mb-4 border-bottom pb-4">Chọn phương thức thanh toán
+                                </h3>
                                 <label>
                                     <input type="radio" name="payment_method" value="cod" checked required>
                                     Thanh toán khi nhận hàng
@@ -228,8 +227,9 @@
                                                     {{ $item['name'] }}
                                                     <i class="ri-close-line ms-3"></i>
                                                 </h6>
-                                                <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: 9
-                                                    / Qty: {{ $item['quantity'] }}</span>
+                                                <span class="d-block text-muted fw-bolder text-uppercase fs-9">Màu: {{$item['color']}}</span>
+                                                <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: {{$item['size']}}
+                                                    / Số lượng: {{ $item['quantity'] }}</span>
                                             </div>
                                             <p class="fw-bolder text-end text-muted m-0">
                                                 {{ number_format($item['price']) }}đ</p>
@@ -242,31 +242,47 @@
                         </div>
                         <div class="py-4 border-bottom">
                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                <p class="m-0 fw-bolder fs-6">Subtotal</p>
+                                <p class="m-0 fw-bolder fs-6">Tổng tiền hàng</p>
                                 <p class="m-0 fs-6 fw-bolder">
                                     {{ number_format(collect($cart)->reduce(fn($sum, $item) => $sum + $item['price'] * $item['quantity'], 0)) }}đ
                                 </p>
                             </div>
                             <div class="d-flex justify-content-between align-items-center ">
-                                <p class="m-0 fw-bolder fs-6">Shipping</p>
-                                <p class="m-0 fs-6 fw-bolder">$8.95</p>
+                                <p class="m-0 fw-bolder fs-6">Phí ship</p>
+                                <p class="m-0 fs-6 fw-bolder">30.000đ</p>
                             </div>
                         </div>
                         <div class="py-4 border-bottom">
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <p class="m-0 fw-bold fs-5">Grand Total</p>
-                                    <span class="text-muted small">Inc $45.89 sales tax</span>
+                                    <p class="m-0 fw-bold fs-5">Tổng tiền đơn hàng</p>
+                                    <span class="text-muted small">Đã bao gồm thuế VAT</span>
                                 </div>
-                                <p class="m-0 fs-5 fw-bold">$422.99</p>
+                                @if (session('coupon'))
+                                    {{ number_format(collect($cart)->reduce(fn($sum, $item) => $sum + $item['price'] * $item['quantity'], 0) - round(session('coupon')['discount'])) }}
+                                @else
+                                    <p class="m-0 fs-5 fw-bold">
+                                        {{ number_format(collect($cart)->reduce(fn($sum, $item) => $sum + $item['price'] * $item['quantity'], 0)) }}
+                                    </p>
+                                @endif
                             </div>
                         </div>
-                        <div class="py-4">
-                            <div class="input-group mb-0">
-                                <input type="text" class="form-control" placeholder="Enter your coupon code">
-                                <button class="btn btn-dark btn-sm px-4">Apply</button>
+                        <form action="{{ route('apply.coupon') }}" method="POST">
+                            @csrf
+                            <div class="py-4">
+                                <div class="input-group mb-0">
+                                    <input type="hidden" name="total"
+                                        value="{{ number_format(collect($cart)->reduce(fn($sum, $item) => $sum + $item['price'] * $item['quantity'], 0)) }}">
+                                    <input type="text" name="coupon_code" class="form-control"
+                                        placeholder="Enter your coupon code">
+                                    <button class="btn btn-dark btn-sm px-4">Apply</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
+                        @if (session('coupon'))
+                            <p>Mã: {{ session('coupon')['code'] }} - Giảm:
+                                {{ number_format(session('coupon')['discount']) }}đ</p>
+                        @endif
                     </div>
                 </div>
             </div>

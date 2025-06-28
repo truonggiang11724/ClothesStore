@@ -5,17 +5,26 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\ProductVariant;
 
 class CartController extends Controller
 {
     //
     public function add(Request $request)
     {
-        $id = $request->input('id');
-        $name = $request->input('name');
-        $price = $request->input('price');
+        $product_id = $request->input('product_id');
+        $color_id = $request->input('color_id');
+        $size_id = $request->input('size_id');
+
+        $product_variant = ProductVariant::with(['color', 'size'])->where('product_id', $product_id)->where('color_id', $color_id)->where('size_id', $size_id)->first();
+        $product = Product::findOrFail($product_id);
+
+        $id = $product_variant->id;
         $quantity = $request->input('quantity', 1);
-        $image = $request->input('image');
+        if ($product_variant) {
+            $color_name = $product_variant->color ? $product_variant->color->name : null;
+            $size_name = $product_variant->size ? $product_variant->size->name : null;
+        }
 
         $cart = session()->get('cart', []);
 
@@ -23,10 +32,12 @@ class CartController extends Controller
             $cart[$id]['quantity'] += $quantity;
         } else {
             $cart[$id] = [
-                'name' => $name,
-                'price' => $price,
+                'name' => $product->name,
+                'price' => $product_variant->variant_price,
+                'color' => $product_variant->color->name,
+                'size' => $product_variant->size->name,
                 'quantity' => $quantity,
-                'image' => $image,
+                'image' => $product_variant->image,
             ];
         }
 

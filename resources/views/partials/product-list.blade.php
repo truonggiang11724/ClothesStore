@@ -14,7 +14,6 @@
                             src="{{ asset($product->image) }}" alt="">
                     @endif
                 </picture>
-
                 {{-- <form action="{{ route('cart.add') }}" method="POST"
                     class="position-absolute start-0 bottom-0 end-0 z-index-40 p-2">
                     @csrf
@@ -25,7 +24,7 @@
                 <div class="position-absolute start-0 bottom-0 end-0 z-index-40 p-2">
                     <button class="add-to-cart-btn btn btn-quick-add"
                  data-id="{{ $product->id }}" data-name="{{ $product->name }}" data-price="{{ $product->price }}" data-image="{{ $product->image}}">
-                    Thêm vào giỏ hàng
+                    Xem chi tiết
                 </button>
                 </div>
                 
@@ -34,8 +33,8 @@
                 <a class="text-decoration-none link-cover"
                     href="{{ route('products.detail', $product->id) }}">{{ $product->name }}</a>
                 <small class="text-muted d-block">{{ $product->description }}</small>
-                <p class="mt-2 mb-0 small"><s class="text-muted">{{ number_format($product->price) }}₫</s> <span
-                        class="text-danger">{{ number_format($product->price * $product->promote) }}₫</span></p>
+                <p class="mt-2 mb-0 small"><s class="text-muted">{{ isset($product->promote) ? number_format($product->price).'₫' : '' }}</s> <span
+                        class="text-danger"> {{ isset($product->promote) ? number_format($product->price * $product->promote) : number_format($product->price) }}₫</span></p>
             </div>
         </div>
         <!--/ Card Product-->

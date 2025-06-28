@@ -43,17 +43,17 @@
                         @foreach ($order->items as $item)
                             <div class="col">
                                 <div class="card h-100 shadow-sm border">
-                                    @php $product = $item->product; @endphp
+                                    @php $productVariant = $item->productVariant; @endphp
 
-                                    @if ($product)
-                                        <img src="{{ $item->product->image }}" class="card-img-top"
-                                            alt="{{ $item->product_name }}" style="height: 180px; object-fit: cover;">
+                                    @if ($productVariant)
+                                        <img src="{{ $item->productVariant->image }}" class="card-img-top"
+                                            alt="{{ $item->productVariant->name }}" style="height: 300px; object-fit: cover;">
                                         <div class="card-body">
-                                            <h6 class="card-title mb-1">{{ $item->product->name }}</h6>
-                                            <p class="mb-1"><strong>Size:</strong> {{ $item->size }}</p>
+                                            <h6 class="card-title mb-1">{{ $item->productVariant->name }}</h6>
+                                            <p class="mb-1"><strong>Màu:</strong> {{ $item->ProductVariant->color->name }} / <strong>Size:</strong> {{ $item->ProductVariant->size->name }}</p>
                                             <p class="mb-1"><strong>Số lượng:</strong> {{ $item->quantity }}</p>
                                             <p class="mb-0"><strong>Giá:</strong> <span
-                                                    class="text-primary">{{ number_format($item->product->price, 0, ',', '.') }}đ</span>
+                                                    class="text-primary">{{ number_format($item->productVariant->variant_price, 0, ',', '.') }}đ</span>
                                             </p>
                                         </div>
                                     @else

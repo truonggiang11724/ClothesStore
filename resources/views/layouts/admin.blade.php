@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,32 +18,47 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" />
-  </head>
-  <body>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
     <div class="container-scroller">
-      <!-- partial:partials/_navbar.html -->
+        <!-- partial:partials/_navbar.html -->
         @include('admin.partials.navbar')
-      <!-- partial -->
-      <div class="container-fluid page-body-wrapper">
-        <!-- partial:partials/_sidebar.html -->
-        @include('admin.partials.sidebar')
         <!-- partial -->
-        <div class="main-panel">
-            @yield('content')
-          <!-- content-wrapper ends -->
-          <!-- partial:partials/_footer.html -->
-          <footer class="footer">
-            <div class="container-fluid d-flex justify-content-between">
-              <span class="text-muted d-block text-center text-sm-start d-sm-inline-block"></span>
-              <span class="float-none float-sm-end mt-1 mt-sm-0 text-end"><a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank"></a> </span>
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_sidebar.html -->
+            @include('admin.partials.sidebar')
+            <!-- partial -->
+            <div class="main-panel">
+                @yield('content')
+                <!-- content-wrapper ends -->
+                <!-- partial:partials/_footer.html -->
+                <footer class="footer mt-5">
+                    <div class="container-fluid d-flex justify-content-between">
+                        <span class="text-muted d-block text-center text-sm-start d-sm-inline-block"></span>
+                        <span class="float-none float-sm-end mt-1 mt-sm-0 text-end"><a
+                                href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank"></a>
+                        </span>
+                    </div>
+                </footer>
+                <!-- partial -->
             </div>
-          </footer>
-          <!-- partial -->
+            <!-- main-panel ends -->
         </div>
-        <!-- main-panel ends -->
-      </div>
-      <!-- page-body-wrapper ends -->
+        <!-- page-body-wrapper ends -->
     </div>
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công!',
+                text: '{{ session('success') }}',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        </script>
+    @endif
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="{{ asset('assets/vendors/js/vendor.bundle.base.js') }}"></script>
@@ -61,5 +77,6 @@
     <script src="{{ asset('assets/js/misc.js') }}"></script>
     <script src="{{ asset('assets/js/chart.js') }}"></script>
     <!-- End custom js for this page -->
-  </body>
+</body>
+
 </html>

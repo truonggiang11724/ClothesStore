@@ -12,7 +12,7 @@ class OrderController extends Controller
     //Điều hướng trang danh sách đơn hàng cho admin
     public function index()
     {
-        $orders = Order::with('items.product')->latest()->paginate(6);
+        $orders = Order::with('items.productVariant.product')->latest()->paginate(6);
         return view('admin.orders.index', compact('orders'));
     }
 

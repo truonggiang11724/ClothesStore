@@ -18,7 +18,9 @@ return new class extends Migration
             $table->foreignId('size_id')->constrained()->onDelete('cascade');
             $table->integer('stock_quantity')->default(0); // Số lượng tồn kho
             $table->decimal('variant_price', 10, 2)->nullable(); // Giá cho biến thể, nếu khác giá gốc
+            $table->string('image');
             $table->timestamps();
+            $table->unique(['product_id', 'size_id', 'color_id']);
         });
     }
 

@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
-use Illuminate\Support\Facades\Storage;
 use App\Models\Category;
+use App\Models\Color;
+use App\Models\ProductVariant;
+use App\Models\Size;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -19,7 +22,11 @@ class ProductController extends Controller
             $query->where('name', 'like', "%$search%");
         }
 
-        $products = $query->latest()->paginate(10);
+        if ($search = $request->category) {
+            $query->where('category_id', "=", $request->category);
+        }
+
+        $products = $query->latest()->paginate(6);
 
         return view('admin.products.index', compact('products'));
     }
@@ -28,44 +35,108 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.products.create', compact('categories'));
+        $sizes = Size::all();
+        $colors = Color::all();
+        return view('admin.products.create', compact('categories', 'sizes', 'colors'));
     }
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required',
-            'description' => 'nullable',
-            'price' => 'required|numeric',
-            'size' => 'nullable',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png',
-            'category_id' => 'required',
+        $validated = $request->validate([
+            'variants' => 'required|array|min:1',
+            'variants.*.size_id' => 'required|exists:sizes,id',
+            'variants.*.color_id' => 'required|exists:colors,id',
+            'variants.*.price' => 'required|numeric|min:0',
+            'variants.*.stock' => 'required|integer|min:0',
+            'variants.*.image' => 'nullable|image',
         ]);
 
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable',
+            'price' => 'required|numeric',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
+            'category_id' => 'required|exists:categories,id',
+        ]);
         if ($request->hasFile('image')) {
-            $destinationPath = public_path('public/assets/images/products/');
+            $destinationPath = public_path('assets/images/products/');
             $fileName = time() . '_' . $request->file('image')->getClientOriginalName();
             $request->file('image')->move($destinationPath, $fileName);
             $data['image'] = 'assets/images/products/' . $fileName;
-            
         }
 
-        Product::create($data);
-        return redirect()->route('admin.product')->with('success', 'Thêm sản phẩm thành công!');
+        try {
+            DB::beginTransaction();
+            // 1. Lưu sản phẩm
+            $product = Product::create($data);
+
+            // 2. Lưu các biến thể
+            foreach ($request->variants as $index => $variant) {
+                $exists = ProductVariant::where('product_id', $product->id)
+                    ->where('size_id', $variant['size_id'])
+                    ->where('color_id', $variant['color_id'])
+                    ->exists();
+
+                if ($exists) {
+                    // Gây lỗi để rollback
+                    throw new \Exception("Biến thể bị trùng (size + color)");
+                }
+                if ($request->hasFile('variants.' . $index . '.image')) {
+                    $destinationPath = public_path('assets/images/products/');
+                    $fileName = time() . '_' . $request->file('variants.' . $index . '.image')->getClientOriginalName();
+                    $request->file('variants.' . $index . '.image')->move($destinationPath, $fileName);
+                    $imagepath = 'assets/images/products/' . $fileName;
+                }
+
+                ProductVariant::create([
+                    'product_id' => $product->id,
+                    'size_id' => $variant['size_id'],
+                    'color_id' => $variant['color_id'],
+                    'variant_price' => $variant['price'],
+                    'stock_quantity' => $variant['stock'],
+                    'image' => $request->hasFile('variants.' . $index . '.image') ? $imagepath : null,
+                ]);
+            }
+
+            DB::commit();
+            return redirect()->route('admin.product')->with('success', 'Thêm sản phẩm thành công');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Lỗi: ' . $e->getMessage());
+        }
     }
 
     public function edit(Request $request)
     {
         $id = $request->query('id'); // Lấy id từ query string
-        $product = Product::findOrFail($id);
-        $categories = Category::all();
-        return view('admin.products.edit', compact('product', 'categories'));
+        $product = Product::with('variants')->findOrFail($id);
+
+        return view('admin.products.edit', [
+            'product' => $product,
+            'categories' => Category::all(),
+            'sizes' => Size::all(),
+            'colors' => Color::all(),
+        ]);
     }
 
     public function update(Request $request)
     {
         $id = $request->input('id');
         $product = Product::findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|max:2048',
+
+            'variants' => 'required|array|min:1',
+            'variants.*.size_id' => 'required|exists:sizes,id',
+            'variants.*.color_id' => 'required|exists:colors,id',
+            'variants.*.price' => 'required|numeric|min:0',
+            'variants.*.stock' => 'required|integer|min:0',
+            'variants.*.image' => 'nullable|image|max:2048',
+        ]);
 
         $data = $request->validate([
             'name' => 'required',
@@ -81,6 +152,12 @@ class ProductController extends Controller
             $fileName = time() . '_' . $request->file('image')->getClientOriginalName();
             $request->file('image')->move($destinationPath, $fileName);
             $data['image'] = 'assets/images/products/' . $fileName;
+            if ($product->image) {
+                $filePath = public_path('assets/images/products/' . basename($product->image));
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                }
+            }
         } else {
             // Nếu không có ảnh mới, giữ nguyên ảnh cũ
             unset($data['image']);
@@ -88,8 +165,89 @@ class ProductController extends Controller
 
         // Cập nhật dữ liệu
         $product->update($data);
+        try {
+            DB::beginTransaction();
 
-        return redirect()->route('admin.product')->with('success', 'Cập nhật sản phẩm thành công!');
+            $product = Product::findOrFail($id);
+
+            $variantIds = [];
+
+            foreach ($request->variants as $index => $variantInput) {
+                $variant = null;
+
+                // Nếu có ID thì cập nhật biến thể cũ
+                if (isset($variantInput['id'])) {
+                    $variant = ProductVariant::where('id', $variantInput['id'])
+                        ->where('product_id', $product->id)
+                        ->first();
+
+                    if ($variant) {
+                        // Cập nhật ảnh nếu có
+                        if ($request->hasFile('variants.' . $index . '.image')) {
+
+                            if ($variant->image) {
+                                $filePath = public_path('assets/images/products/' . basename($variant->image));
+                                if (file_exists($filePath)) {
+                                    unlink($filePath);
+                                }
+                            }
+                            $destinationPath = public_path('assets/images/products/');
+                            $fileName = time() . '_' . $request->file('variants.' . $index . '.image')->getClientOriginalName();
+                            $request->file('variants.' . $index . '.image')->move($destinationPath, $fileName);
+                            $imagepath = 'assets/images/products/' . $fileName;
+                            $variant->image = $imagepath;
+                        }
+                        $variant->size_id = $variantInput['size_id'];
+                        $variant->color_id = $variantInput['color_id'];
+                        $variant->variant_price = $variantInput['price'];
+                        $variant->stock_quantity = $variantInput['stock'];
+                        $variant->save();
+
+                        $variantIds[] = $variant->id;
+                        continue;
+                    }
+                }
+
+                // Nếu không có ID hoặc ID không khớp → thêm mới
+                if ($request->hasFile('variants.' . $index . '.image')) {
+                    $destinationPath = public_path('assets/images/products/');
+                    $fileName = time() . '_' . $request->file('variants.' . $index . '.image')->getClientOriginalName();
+                    $request->file('variants.' . $index . '.image')->move($destinationPath, $fileName);
+                    $imagepath = 'assets/images/products/' . $fileName;
+                }
+
+                $newVariant = ProductVariant::create([
+                    'product_id' => $product->id,
+                    'size_id' => $variantInput['size_id'],
+                    'color_id' => $variantInput['color_id'],
+                    'variant_price' => $variantInput['price'],
+                    'stock_quantity' => $variantInput['stock'],
+                    'image' => $request->hasFile('variants.' . $index . '.image') ? $imagepath : null,
+                ]);
+
+                $variantIds[] = $newVariant->id;
+            }
+
+            // Xoá những biến thể cũ không còn trong form
+            ProductVariant::where('product_id', $product->id)
+                ->whereNotIn('id', $variantIds)
+                ->get()
+                ->each(function ($variant) {
+                    if ($variant->image) {
+                        $filePath = public_path('assets/images/products/' . basename($variant->image));
+                        if (file_exists($filePath)) {
+                            unlink($filePath);
+                        }
+                    }
+                    $variant->delete();
+                });
+
+            DB::commit();
+            return redirect()->route('admin.product')->with('success', 'Cập nhật sản phẩm thành công!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Lỗi khi cập nhật sản phẩm: ' . $e->getMessage());
+        }
     }
 
     public function destroy(Request $request)
@@ -105,6 +263,29 @@ class ProductController extends Controller
     public function detail($id)
     {
         $product = Product::findOrFail($id);
-        return view('pages.detailproduct', compact('product'));
+        $variants = ProductVariant::where('product_id', $id)->get();
+        $sizes = Size::all();
+        $colors = Color::all();
+        $images = DB::select('SELECT image FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY color_id ORDER BY created_at) as rn 
+        FROM product_variants WHERE product_id='.$id.') sub WHERE rn = 1;');
+
+        return view('pages.detailproduct', compact('product', 'variants', 'colors', 'sizes','images'));
+    }
+
+    public function getSizesByColor(Request $request)
+    {
+        $product_id = $request->product_id;
+        $color_id = $request->color_id;
+
+        $sizeIds = ProductVariant::where('product_id', $product_id)
+            ->where('color_id', $color_id)
+            ->pluck('size_id')
+            ->unique()
+            ->values();
+
+        $sizes = Size::whereIn('id', $sizeIds)->get();
+
+
+        return response()->json($sizes);
     }
 }

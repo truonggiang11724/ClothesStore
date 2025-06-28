@@ -1,6 +1,6 @@
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <a class="navbar-brand brand-logo" href="index.html"><img class="f-w-36" src="https://theme.hstatic.net/200000265619/1001353407/14/logo.png?v=355" alt="logo" /></a>
+          <a class="navbar-brand brand-logo" href="{{route('admin.dashboard')}}"><img class="f-w-36" src="{{ asset('assets/images/logos/logo-3.svg') }}" alt="logo" /></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -20,7 +20,7 @@
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                 <div class="nav-profile-img">
-                  <img src="{{ asset('assets/images/faces/face1.jpg') }}" alt="image">
+                  <img src="{{ asset('assets/images/faces/user.png') }}" alt="image">
                   <span class="availability-status online"></span>
                 </div>
                 <div class="nav-profile-text">

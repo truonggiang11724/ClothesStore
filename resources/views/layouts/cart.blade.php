@@ -72,18 +72,13 @@
                         <nav class="d-none d-md-block">
                             <ul
                                 class="list-unstyled d-flex justify-content-start mt-4 align-items-center fw-bolder small">
-                                <li class="me-4"><a class="nav-link-checkout active" href="{{ route('cart') }}">Your
-                                        Cart</a></li>
-                                <li class="me-4"><a class="nav-link-checkout "
-                                        href="{{ route('checkout') }}">Information</a></li>
-                                {{-- <li class="me-4"><a class="nav-link-checkout "
-                                        href="{{ route('checkout_shipping') }}">Shipping</a></li>
-                                <li><a class="nav-link-checkout nav-link-last "
-                                        href="{{ route('checkout_payment') }}">Payment</a></li> --}}
+                                <li class="me-4"><a class="nav-link-checkout active" href="{{ route('cart') }}">Giỏ
+                                        hàng</a></li>
+                                <li class="me-4"><a class="nav-link-checkout " href="#">Thông tin</a></li>
                             </ul>
                         </nav>
                         <div class="mt-5">
-                            <h3 class="fs-5 fw-bolder mb-0 border-bottom pb-4">Your Cart</h3>
+                            <h3 class="fs-5 fw-bolder mb-0 border-bottom pb-4">Giỏ hàng</h3>
                             <div class="table-responsive">
                                 <table class="table align-middle">
                                     <tbody class="border-0">
@@ -108,12 +103,16 @@
                                                                 style="background:0%;border:0;"><i
                                                                     class="ri-close-line ms-3"></i></button>
                                                         </h6>
-                                                        <span class="d-block text-muted fw-bolder fs-9">Price:
+                                                        <span class="d-block text-muted fw-bolder fs-9">Giá:
                                                             {{ number_format($item['price']) }}đ</span>
+                                                        <span class="d-block text-muted fw-bolder fs-9">Màu: 
+                                                            {{ $item['color'] }}</span>
+                                                        <span class="d-block text-muted fw-bolder fs-9">Size: 
+                                                            {{ $item['size'] }}</span>
 
                                                         <div class="position:absolute; right:0; bottom:0">
                                                             <div class="">
-                                                                <span>Quantity: </span>
+                                                                <span>Số lượng: </span>
                                                                 <button class="quantity-btn"
                                                                     data-action="decrease">−</button>
                                                                 <span style="margin: 0 10px"
@@ -121,9 +120,7 @@
                                                                 <button class="quantity-btn"
                                                                     data-action="increase">+</button>
                                                             </div>
-                                                            <div><span class="item-total">Total price:
-                                                                    {{ number_format($item['price'] * $item['quantity']) }}</span>
-                                                                đ</div>
+
                                                         </div>
 
                                                     </div>
@@ -143,22 +140,16 @@
                         <div class="pb-4 border-bottom">
                             <div class="d-flex flex-column flex-md-row justify-content-md-between mb-4 mb-md-2">
                                 <div>
-                                    <p class="m-0 fw-bold fs-5">Grand Total</p>
-                                    <span class="text-muted small">Inc $45.89 sales tax</span>
+                                    <p class="m-0 fw-bold fs-5">Tổng tiền hàng</p>
+                                    <span class="text-muted small">Đã bao gồm thuế VAT</span>
                                 </div>
                                 <p class="m-0 fs-5 fw-bold"><span id="cart-total">
                                         {{ number_format(collect($cart)->reduce(fn($sum, $item) => $sum + $item['price'] * $item['quantity'], 0)) }}
                                     </span> đ</p>
                             </div>
                         </div>
-                        <div class="py-4">
-                            <div class="input-group mb-0">
-                                <input type="text" class="form-control" placeholder="Enter coupon code">
-                                <button class="btn btn-secondary btn-sm px-4">Apply</button>
-                            </div>
-                        </div>
-                        <a href="{{ route('order') }}" class="btn btn-dark w-100 text-center" role="button">Proceed
-                            to checkout</a>
+                        <a href="{{ route('order') }}" class="btn btn-dark w-100 text-center" role="button">Xác nhận
+                            hàng</a>
                     </div>
                 </div>
             </div>

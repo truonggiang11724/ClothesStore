@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Coupon;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -55,8 +56,10 @@ class OrderController extends Controller
         if (empty($cart)) {
             return redirect()->back()->with('error', 'Giỏ hàng trống');
         }
+        // Tính tổng tiền cần thanh toán
+        if (session('coupon')) $totalPrice = collect($cart)->reduce(fn($sum, $item) => $sum + $item['price'] * $item['quantity'], 0) - round(session('coupon')['discount']);
+        else $totalPrice = collect($cart)->reduce(fn($sum, $item) => $sum + $item['price'] * $item['quantity'], 0);
 
-        $totalPrice = collect($cart)->reduce(fn($sum, $item) => $sum + $item['price'] * $item['quantity'], 0);
         if ($request->payment_method == 'cod')
             $order_status = 'Đang giao hàng';
         else $order_status = 'Chưa thanh toán';
@@ -81,6 +84,10 @@ class OrderController extends Controller
         }
         // Xóa giỏ hàng
         session()->forget('cart');
+        $coupon = Coupon::where('code', session('coupon')['code'])->first();
+        $coupon->usage_limit = $coupon->usage_limit - 1;
+        $coupon->update();
+        session()->forget('coupon');
         if ($request->payment_method == 'cod') {
             return redirect()->route('cart')->with('success', 'Đặt hàng thành công!');
         } else {
@@ -91,7 +98,7 @@ class OrderController extends Controller
     //Điều hướng trang danh sách đơn hàng
     public function list_order()
     {
-        $orders = Order::with('items.product')->where('customer_id', Auth::user()->id)->latest()->paginate(6);
+        $orders = Order::with('items.productVariant.product')->where('customer_id', Auth::user()->id)->latest()->paginate(6);
         return view('pages.list_order', compact('orders'));
     }
 }

@@ -16,10 +16,13 @@ class DatabaseSeederExtended extends Seeder
         $this->call([
             CategorySeeder::class,
             ColorSeeder::class,
+            SizeSeeder::class,
             ProductSeeder::class,
             ProvincesTableSeeder::class,
             DistrictsTableSeeder::class,
             WardsTableSeeder::class,
+            ProductVariantSeeder::class,
+            CouponSeeder::class,
         ]);
     }
 }

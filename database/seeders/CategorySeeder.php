@@ -15,7 +15,8 @@ class CategorySeeder extends Seeder
     {
         //
         Category::create(['name' => 'Áo']);
-        Category::create(['name' => 'Quần']);
+        Category::create(['name' => 'Phụ kiện']);
         Category::create(['name' => 'Giày']);
+        Category::create(['name' => 'Quần']);
     }
 }
