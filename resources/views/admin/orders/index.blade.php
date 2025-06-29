@@ -13,7 +13,7 @@
                         class="badge bg-{{ $order->order_status == 'Đã giao hàng' ? 'success' : ($order->order_status == 'Chưa thanh toán' ? 'danger' : 'secondary') }}">
                         {{ $order->order_status }}
                     </span>
-                        @if($order->order_status !== 'Đã giao hàng')
+                        @if($order->order_status == 'Đang giao hàng')
                             <form action="{{ route('admin.orders.deliver') }}" method="POST" onsubmit="return confirm('Xác nhận đơn hàng đã giao?');">
                                 @csrf
                                 <input type="hidden" name="order_id" value="{{ $order->id }}">

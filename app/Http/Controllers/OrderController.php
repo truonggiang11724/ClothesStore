@@ -98,7 +98,7 @@ class OrderController extends Controller
     //Điều hướng trang danh sách đơn hàng
     public function list_order()
     {
-        $orders = Order::with('items.productVariant.product')->where('customer_id', Auth::user()->id)->latest()->paginate(6);
-        return view('pages.list_order', compact('orders'));
+        $orders = Order::with(['items.productVariant.product'])->where('customer_id', Auth::user()->id)->latest()->paginate(6);
+        return view('pages.list_order', compact('orders')); 
     }
 }

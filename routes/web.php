@@ -52,6 +52,11 @@ require __DIR__ . '/auth.php';
 
 // Route ProductController
 Route::get('/get-sizes-by-color', [ProductController::class, 'getSizesByColor']);
+Route::middleware('auth')->group(function () {
+    Route::post('/feedback', [ProductController::class, 'feedback'])->name('product.feedback');
+    Route::post('/feedback/submit', [ProductController::class, 'submitFeedback'])->name('product.feedback.submit');
+});
+
 
 
 //Route Category Controller

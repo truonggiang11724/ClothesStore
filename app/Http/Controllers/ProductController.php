@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Color;
+use App\Models\Feedback;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\ProductVariant;
 use App\Models\Size;
 use Illuminate\Support\Facades\DB;
@@ -260,16 +263,26 @@ class ProductController extends Controller
     }
 
 
-    public function detail($id)
+    public function detail($id, Request $request)
     {
+        // Thông tin sản phẩm
         $product = Product::findOrFail($id);
         $variants = ProductVariant::where('product_id', $id)->get();
         $sizes = Size::all();
         $colors = Color::all();
         $images = DB::select('SELECT image FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY color_id ORDER BY created_at) as rn 
-        FROM product_variants WHERE product_id='.$id.') sub WHERE rn = 1;');
+        FROM product_variants WHERE product_id=' . $id . ') sub WHERE rn = 1;');
 
-        return view('pages.detailproduct', compact('product', 'variants', 'colors', 'sizes','images'));
+        // Đánh giá sản phẩm
+        $feedbacks = Feedback::with('user')->where('product_id', $id)->get();
+        $comments = Feedback::with('user')->where('product_id', $id)->latest()->paginate(6);
+
+        if ($request->ajax()) {
+            $display = $comments->perPage() * $comments->currentPage();
+            return view('partials.feedback', compact('comments','display'))->render();
+        }
+
+        return view('pages.detailproduct', compact('product', 'variants', 'colors', 'sizes', 'images', 'feedbacks', 'comments'));
     }
 
     public function getSizesByColor(Request $request)
@@ -287,5 +300,50 @@ class ProductController extends Controller
 
 
         return response()->json($sizes);
+    }
+
+    public function feedback(Request $request)
+    {
+        $request->validate([
+            'order_id' => 'required',
+        ]);
+        $order_id = $request->order_id;
+        $orders = Order::with(['items.productVariant.product'])->where('id', $order_id)->get();
+        return view('pages.feedback', compact('orders'));
+    }
+
+    public function submitFeedback(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required',
+            'order_id' => 'required',
+        ]);
+        $user_id = $request->user_id;
+        $order_id = $request->order_id;
+
+        $items = OrderItem::where('order_id', $order_id)->get();
+        foreach ($items as $item) {
+            $variant_id = $item->product_id;
+            $request->validate([
+                'rating-' . $variant_id => 'required|integer|min:1|max:5',
+                'comment-' . $variant_id => 'nullable|string',
+            ]);
+
+            $variant = ProductVariant::findOrFail($variant_id);
+            $product_id = $variant->product_id;
+
+            Feedback::create([
+                'order_id' => $order_id,
+                'product_id' => $product_id,
+                'user_id' => $user_id,
+                'rating' => $request->input('rating-' . $variant_id),
+                'comment' => $request->input('comment-' . $variant_id),
+            ]);
+        }
+        $order = Order::findOrFail($order_id);
+        $order->order_status = 'Đã đánh giá';
+        $order->update();
+
+        return redirect()->route('list_order')->with('success', 'Cảm ơn bạn đã đánh giá sản phẩm!');
     }
 }

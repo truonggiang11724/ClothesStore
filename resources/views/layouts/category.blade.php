@@ -78,7 +78,7 @@
         @if ($products->hasMorePages())
             <!-- Pagination-->
             <div class="d-flex flex-column f-w-44 mx-auto my-5 text-center">
-                <small class="text-muted">Hiển thị {{ $products->perPage() * $products->currentPage() }} trong số
+                <small class="text-muted">Hiển thị <strong id="product-display">{{ $products->perPage() * $products->currentPage() }}</strong> trong số
                     {{ $products->total() }} sản phẩm</small>
                 <div class="progress f-h-1 mt-3">
                     <div class="progress-bar bg-dark" role="progressbar" style="width: 25%" aria-valuenow="25"
@@ -102,7 +102,8 @@
             let baseUrl = new URL(window.location.href);
             baseUrl.searchParams.set('page', nextPage);
             let finalUrl = baseUrl.toString();
-
+            let product_display = $('#product-display');
+            let total_product = {{$products->total()}};
             $.ajax({
                 url: finalUrl,
                 type: 'GET',
@@ -112,11 +113,12 @@
                 success: function(data) {
                     $('#product-container').append(data);
                     button.data('next-page', nextPage + 1);
-
+                    product_display.text(nextPage*6)
                     // Ẩn nút nếu không còn trang tiếp theo
                     $.get('?page=' + (nextPage + 1), function(response) {
                         if (response.trim() === '') {
                             button.remove();
+                            product_display.text(total_product)
                         } else {
                             button.text('Load more');
                         }

@@ -10,17 +10,26 @@
                     <div>
                         <strong>Đơn hàng #{{ $order->id }}</strong> - {{ $order->created_at->format('d/m/Y H:i') }}
                     </div>
-                    <span
-                        class="badge bg-{{ $order->order_status == 'Đã giao hàng' ? 'success' : ($order->order_status == 'Chưa thanh toán' ? 'danger' : 'secondary') }}">
-                        {{ $order->order_status }}
-                    </span>
-                    @if ($order->order_status == 'Chưa thanh toán')
-                        <form action="{{ route('checkout.index') }}" method="POST" style="position: absolute;right:16px;top:50px">
-                            @csrf
-                            <input type="hidden" name="order_id" value="{{ $order->id }}">
-                            <button type="submit" class="badge bg-success">Thanh toán</button>
-                        </form>
-                    @endif
+                    <div class="d-flex">
+                        <span
+                            class="badge bg-{{ $order->order_status == 'Chưa thanh toán' ? 'secondary' : 'success' }}">
+                            {{ $order->order_status == 'Chưa thanh toán' ? 'Chưa thanh toán' : 'Đã giao hàng'}}
+                        </span>
+                        @if ($order->order_status == 'Đã giao hàng')
+                            <form action="{{ route('product.feedback') }}" method="POST"
+                                style="border:none; margin-left:20px">
+                                @csrf
+                                <input type="hidden" name="order_id" value="{{ $order->id }}">
+                                <button type="submit" class="badge bg-warning" style="border: 0;padding: 6px 8px;">Đánh giá
+                                    đơn hàng</button>
+                            </form>
+                        @endif
+                        @if ($order->order_status == 'Đã đánh giá')
+                            <span class="badge bg-warning" style="margin-left:20px;color:black">Đã đánh giá</span>
+                        @endif
+                    </div>
+
+
                 </div>
                 <div class="card-body">
                     <div class="row mb-3">
@@ -30,7 +39,7 @@
                             <p><strong>📧 Email:</strong> {{ $order->email }}</p>
                         </div>
                         <div class="col-md-6">
-                            <p><strong>📍 Địa chỉ:</strong> {{ $order->address }}</p>
+                            <p><strong>📍 Địa chỉ:</strong> {{ $order->address }} - {{ $order->ward }}</p>
                             <p><strong>💵 Tổng tiền:</strong> <span
                                     class="text-danger fw-bold">{{ number_format($order->total_price, 0, ',', '.') }}đ</span>
                             </p>
@@ -47,10 +56,13 @@
 
                                     @if ($productVariant)
                                         <img src="{{ $item->productVariant->image }}" class="card-img-top"
-                                            alt="{{ $item->productVariant->name }}" style="height: 300px; object-fit: cover;">
+                                            alt="{{ $item->productVariant->name }}"
+                                            style="height: 300px; object-fit: cover;">
                                         <div class="card-body">
                                             <h6 class="card-title mb-1">{{ $item->productVariant->name }}</h6>
-                                            <p class="mb-1"><strong>Màu:</strong> {{ $item->ProductVariant->color->name }} / <strong>Size:</strong> {{ $item->ProductVariant->size->name }}</p>
+                                            <p class="mb-1"><strong>Màu:</strong>
+                                                {{ $item->ProductVariant->color->name }} / <strong>Size:</strong>
+                                                {{ $item->ProductVariant->size->name }}</p>
                                             <p class="mb-1"><strong>Số lượng:</strong> {{ $item->quantity }}</p>
                                             <p class="mb-0"><strong>Giá:</strong> <span
                                                     class="text-primary">{{ number_format($item->productVariant->variant_price, 0, ',', '.') }}đ</span>
@@ -75,4 +87,15 @@
             {{ $orders->links() }}
         </div>
     </div>
+    @if (session('success'))
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Đã đánh giá!',
+                text: '{{ session('success') }}',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
 @endsection
